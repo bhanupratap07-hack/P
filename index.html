@@ -147,31 +147,8 @@
         </button>
     </div>
 
-    <audio id="bgMusic" loop>
-        <source src="song.mp3" type="audio/mp3">
-    </audio>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
     <script>
-        // Music Logic
-        const audio = document.getElementById('bgMusic');
-        
-        // Try to retrieve time from other pages
-        const savedTime = localStorage.getItem('musicTime');
-        if(savedTime) {
-            audio.currentTime = savedTime;
-        }
-
-        // Save time on exit
-        window.addEventListener('beforeunload', () => {
-            localStorage.setItem('musicTime', audio.currentTime);
-        });
-
-        // Play on user interaction (required by browsers)
-        document.body.addEventListener('click', () => {
-            audio.play().catch(e => console.log("Audio play failed", e));
-        }, { once: true });
-
         function goToNextPage() {
             gsap.to('.next-button', {
                 scale: 1.3,
