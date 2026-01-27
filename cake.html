@@ -48,9 +48,6 @@
 </head>
 <body>
     
-    <audio id="bgMusic" autoplay loop hidden>
-        <source src="song.mp3" type="audio/mp3">
-    </audio>
     <h1 class="heading">Make a Wish, Riya! 🎂</h1>
     <div class="click-message">Click the cake!</div>
     <div class="cake-container">
@@ -70,31 +67,6 @@
     <button class="next-page-button">Read My Letter →</button>
 
     <script>
-        // --- NEW MAGIC MUSIC LOGIC ---
-        const audio = document.getElementById('bgMusic');
-
-        // 1. RECOVER TIME: Start song exactly where it stopped on previous page
-        const savedTime = localStorage.getItem('musicTime');
-        if(savedTime) {
-            audio.currentTime = savedTime;
-        }
-
-        // 2. ENSURE PLAY: Try to play immediately
-        window.addEventListener('load', () => {
-            audio.play().catch(error => { console.log("Waiting for click to play music"); });
-        });
-
-        // 3. BACKUP: Play on first click if autoplay was blocked
-        document.body.addEventListener('click', () => {
-            if (audio.paused) audio.play();
-        }, { once: true });
-
-        // 4. SAVE TIME: Save current time before going to next page
-        window.addEventListener('beforeunload', () => {
-            localStorage.setItem('musicTime', audio.currentTime);
-        });
-        // ----------------------------
-
         const cake = document.querySelector('.cake-container');
         const candle = document.querySelector('.candle');
         const flame = document.querySelector('.flame');
@@ -139,9 +111,6 @@
         }
 
         document.querySelector('.next-page-button').addEventListener('click', () => {
-            // Save music time immediately when clicking Next button
-            localStorage.setItem('musicTime', audio.currentTime);
-            
             gsap.to(document.body, { opacity: 0, duration: 0.5, onComplete: () => window.location.href = 'celebrate.html' });
         });
 
