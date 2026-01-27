@@ -36,10 +36,7 @@
     </style>
 </head>
 <body class="min-h-screen bg-gradient-to-br from-pink-100 via-purple-100 to-blue-100 overflow-hidden relative">
-    <audio id="bgMusic" loop>
-        <source src="song.mp3" type="audio/mp3">
-    </audio>
-
+    
     <div class="absolute inset-0 pointer-events-none">
         <div class="heart" style="top: 10%; left: 10%;"></div>
         <div class="heart" style="bottom: 10%; right: 25%;"></div>
@@ -75,26 +72,19 @@
     </div>
     
     <script>
-        // Music Logic
-        const audio = document.getElementById('bgMusic');
-        const savedTime = localStorage.getItem('musicTime');
-        if(savedTime) audio.currentTime = savedTime;
-        window.addEventListener('beforeunload', () => localStorage.setItem('musicTime', audio.currentTime));
-        document.body.addEventListener('click', () => audio.play().catch(e=>{}), { once: true });
-
         // Navigation
         document.querySelector('.next-page-btn').addEventListener('click', function() {
             document.body.classList.add('fade-out');
             setTimeout(function() { window.location.href = "cake.html"; }, 700); 
         });
 
-        // Photos Data - REMEMBER TO ADD YOUR OWN PHOTOS AS pic1.jpg, pic2.jpg etc.
+        // Photos Data - MATCHING YOUR SCREENSHOT FILE NAMES EXACTLY
         const memories = [
-            { photo: 'pic1.jpg', caption: 'Elegance and pure joy. Happy Birthday to my favorite girl! Go shine. 🎉' },
-            { photo: 'pic2.jpg', caption: 'Selfie girl 🫣🫠' },
-            { photo: 'pic3.png', caption: 'My Lovely Bestie 🌸🌸' },
-            { photo: 'pic4.png', caption: 'Happy Birthday  👻🐒' },
-            { photo: 'pic5.png', caption: 'Forever and always, my bestie 💗💝' }
+            { photo: '1.jpg', caption: 'Elegance and pure joy. Happy Birthday to my favorite girl! Go shine. 🎉' },
+            { photo: '2.JPG', caption: 'Selfie girl 🫣🫠' },
+            { photo: '3.png', caption: 'My Lovely Bestie 🌸🌸' },
+            { photo: '4.png', caption: 'Happy Birthday  👻🐒' },
+            { photo: '5.png', caption: 'Forever and always, my bestie 💗💝' }
         ];
         
         let currentPhotoIndex = 0;
