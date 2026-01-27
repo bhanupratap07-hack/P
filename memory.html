@@ -36,8 +36,7 @@
     </style>
 </head>
 <body class="min-h-screen bg-gradient-to-br from-pink-100 via-purple-100 to-blue-100 overflow-hidden relative">
-    
-    <audio id="bgMusic" autoplay loop hidden>
+    <audio id="bgMusic" loop>
         <source src="song.mp3" type="audio/mp3">
     </audio>
 
@@ -76,23 +75,12 @@
     </div>
     
     <script>
-        // --- MUSIC LOGIC ---
+        // Music Logic
         const audio = document.getElementById('bgMusic');
-        
-        // Try to play automatically on load
-        window.addEventListener('load', () => {
-            audio.play().catch(error => {
-                console.log("Autoplay blocked - waiting for interaction.");
-            });
-        });
-
-        // Backup: Ensure music starts on the very first click anywhere on the page
-        document.body.addEventListener('click', () => {
-            if (audio.paused) {
-                audio.play();
-            }
-        }, { once: true });
-        // -------------------
+        const savedTime = localStorage.getItem('musicTime');
+        if(savedTime) audio.currentTime = savedTime;
+        window.addEventListener('beforeunload', () => localStorage.setItem('musicTime', audio.currentTime));
+        document.body.addEventListener('click', () => audio.play().catch(e=>{}), { once: true });
 
         // Navigation
         document.querySelector('.next-page-btn').addEventListener('click', function() {
